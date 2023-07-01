@@ -1,11 +1,15 @@
 <?php
+
 /**
  * kawashima functions and definitions
  *
  * @link https://developer.wordpress.org/themes/basics/theme-functions/
  *
  * @package kawashima
+ * 
+ * 
  */
+
 
 add_action('init', function () {
     register_post_type('item', [
@@ -20,26 +24,37 @@ add_action('init', function () {
         'show_in_rest' => true,
         //新しいvsersionに変更
 
-        'supports' => array(
+        'supports' => [
             //記事編集画面に表示する項目を配列で指定することができる
             'title',
             //タイトル
             'editor',
             //本文の編集機能
             'thumbnail',
-            //アイキャッチ画像（add_theme_support('post-thumbnails')が必要）
-            'has_archive' => true,
-            //一覧画面を生成する
-            'page-attributes' //★ページ属性（親を選択するドロップダウン）を表示
+            'page-attributes', //★ページ属性（親を選択するドロップダウン）を表示
+            // これを加えることで固定ページと同じ親子関係を作ることができる
+            'custom-fields'
+        ],
+        //アイキャッチ画像（add_theme_support('post-thumbnails')が必要）
+        'has_archive' => true,
+        //一覧画面を生成する
 
-        )
+
+
     ]);
-    //カスタム投稿タイプに紐づく独自のタグの作成
+    //カスタム投稿タイプに紐づく独自のタグであったりかてごりーを独自に作成
+    //initアクションを使って呼び出さなければならない
+    // カスタム投稿item にタグをつけたいので、itemをposttypeに選択
+    //固定ページならpage,投稿ならpostにする
+    //genreはスラッグ名になる
+    // テンプレートファイルで言うと、taxonomy.phpとなる
+
     register_taxonomy('genre', 'item', [
         'label' => '商品ジャンル',
         'hierarchical' => true,
+        //trueだったらカテゴリーとなりカテゴリー同士で親と子に結びつけることができる、falseだったらタグ
         'show_in_rest' => true,
-        //新しいvsersionに変更
+        //新しいvsersionに変更ここにも卯t蹴てあげる必要がある
 
     ]);
 });

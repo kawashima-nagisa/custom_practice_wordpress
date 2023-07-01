@@ -15,17 +15,19 @@ get_header();
 <main id="primary" class="site-main col-md-8">
 
     <?php
-    while (have_posts()):
+    while (have_posts()) :
         the_post();
-        ?>
+    ?>
         <h1>ここは商品詳細</h1>
 
-        <? #php the_taxonomies(); ?>
+        <? #php the_taxonomies(); 
+        ?>
         <?php $terms = get_the_terms(get_the_ID(), 'genre'); ?>
 
-        <?php if ($terms): ?>
+        <?php if ($terms) : ?>
+            <!-- もしこのカテゴリーがあるなら -->
             <ul>
-                <?php foreach ($terms as $term): ?>
+                <?php foreach ($terms as $term) : ?>
                     <li>
                         <a href="
                         <?php echo get_term_link($term); ?>">
@@ -37,7 +39,7 @@ get_header();
         <?php endif; ?>
 
 
-        <?
+    <?
         get_template_part('template-parts/content', get_post_type());
 
         the_post_navigation(
@@ -48,7 +50,7 @@ get_header();
         );
 
         // If comments are open or we have at least one comment, load up the comment template.
-        if (comments_open() || get_comments_number()):
+        if (comments_open() || get_comments_number()) :
             comments_template();
         endif;
 
