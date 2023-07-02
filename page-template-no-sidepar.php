@@ -1,4 +1,7 @@
 <?php
+/* 
+Template Name: サイドバーなし
+*/
 
 /**
  * The template for displaying all pages
